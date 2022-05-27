@@ -1,0 +1,49 @@
+1- Flutter proje kurulumu
+2- main dart temizle
+3- çalıştır
+4- kütüphaneleri ekle
+	  cloud_firestore: ^3.1.13
+	  file_picker: ^4.5.1
+	  firebase_core: ^1.15.0
+	  firebase_storage: ^10.2.13
+	  permission_handler: ^9.2.0
+
+5- https://firebase.flutter.dev/docs/firestore/overview/ dokümantasyona git.
+6- core ile başla
+7- fb console ayarlamaları.
+	proje oluştur.
+	app oluştur.
+	GoogleServiceinfoplist xcode a ekle.
+8- firestore db kurulumu	
+	infoplist
+target 'Runner' do
+  pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '8.15.0'
+  use_frameworks!
+  use_modular_headers!
+
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+end
+	name,url,uploadtime
+	rule  true
+	image_model oluştur.
+9- firestore storage kurulumu
+	rule true
+10- podfile ios 12 çek
+11- file picker 
+	podfile permission
+	infoplist keystring
+12- permission handler
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
+        '$(inherited)',
+        ## dart: PermissionGroup.photos
+        'PERMISSION_PHOTOS=1',
+      ]
+    end
+  end
+end
+
+13- LET MAGIC HAPPEN 
